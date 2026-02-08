@@ -17,16 +17,18 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final List<Map<String, String>> tasks = [];
+
   void _openBottomSheet() {
     showModalBottomSheet(
       context: context,
       builder: (_) => OpenBottomSheet(
-        onSend: (title, description, date) {
+        onSend: (title, description, date, priority) {
           setState(() {
             tasks.add({
               'title': title,
               'description': description,
               if (date != null) 'date': date.toIso8601String(),
+              'priority': priority.toString(), 
             });
           });
         },
@@ -114,9 +116,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: tasks.length,
                   itemBuilder: (context, index) {
                     final task = tasks[index];
+                    final int priority =
+                        int.tryParse(task['priority'] ?? '1') ?? 1;
+
                     return TodoBox(
                       task: task,
                       onPickDate: () => _pickDateForTask(index),
+                      selectedPriority:
+                          priority, // передаем выбранный приоритет
                     );
                   },
                 ),

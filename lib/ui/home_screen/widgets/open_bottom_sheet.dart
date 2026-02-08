@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:up_todo/ui/home_screen/widgets/task_category_sheet.dart';
 import 'package:up_todo/ui/home_screen/widgets/task_priority_example.dart';
-
 import 'package:up_todo/utils/constants/app_colors.dart';
 import 'package:up_todo/utils/constants/app_texts.dart';
-import 'package:iconsax_plus/iconsax_plus.dart';
 
 class OpenBottomSheet extends StatefulWidget {
-  final void Function(String title, String description, DateTime? date) onSend;
+  final void Function(
+    String title,
+    String description,
+    DateTime? date,
+    int priority,
+  )
+  onSend;
 
   const OpenBottomSheet({super.key, required this.onSend});
 
@@ -18,6 +24,7 @@ class _OpenBottomSheetState extends State<OpenBottomSheet> {
   String title = '';
   String description = '';
   DateTime? selectedDate;
+  int _priority = 1; // по умолчанию
 
   Future<void> _pickDate() async {
     final DateTime? picked = await showDatePicker(
@@ -37,21 +44,18 @@ class _OpenBottomSheetState extends State<OpenBottomSheet> {
       ),
     );
 
-    if (picked != null) {
-      setState(() => selectedDate = picked);
-    }
+    if (picked != null) setState(() => selectedDate = picked);
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 240,
+      height: 300,
       color: AppColors.darkGrey,
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 8),
           Text(
             AppTexts.addTask,
             style: const TextStyle(
@@ -73,7 +77,7 @@ class _OpenBottomSheetState extends State<OpenBottomSheet> {
             ),
             style: const TextStyle(color: AppColors.white),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 8),
           TextField(
             onChanged: (value) => description = value,
             decoration: InputDecoration(
@@ -83,12 +87,10 @@ class _OpenBottomSheetState extends State<OpenBottomSheet> {
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: AppColors.grey),
               ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(4),
-              ),
             ),
             style: const TextStyle(color: AppColors.white),
           ),
+          const SizedBox(height: 12),
           Row(
             children: [
               IconButton(
@@ -100,30 +102,36 @@ class _OpenBottomSheetState extends State<OpenBottomSheet> {
                 icon: const Icon(IconsaxPlusLinear.tag),
                 color: AppColors.white,
                 onPressed: () async {
-                  final selectedPriority = await showDialog<int>(
+                  final selected = await showDialog<int>(
                     context: context,
-                    builder: (_) => const TaskPriorityExample(),
+                    builder: (_) => const TaskCategorySheet(),
                   );
-                  if (selectedPriority != null) {
-                    print('Выбранный приоритет: $selectedPriority');
-                  }
+                  if (selected != null) setState(() => _priority = selected);
                 },
               ),
-
               IconButton(
                 icon: const Icon(IconsaxPlusLinear.flag),
                 color: AppColors.white,
-                onPressed: () {},
+                onPressed: () async {
+                  final selected = await showDialog<int>(
+                    context: context,
+                    builder: (_) => const TaskPriorityExample(),
+                  );
+                  if (selected != null) setState(() => _priority = selected);
+                },
               ),
               const Spacer(),
-
               IconButton(
                 icon: const Icon(IconsaxPlusLinear.send_1),
                 color: AppColors.buttonPrimary,
                 onPressed: () {
                   if (title.trim().isEmpty) return;
-
-                  widget.onSend(title.trim(), description.trim(), selectedDate);
+                  widget.onSend(
+                    title.trim(),
+                    description.trim(),
+                    selectedDate,
+                    _priority,
+                  );
                   Navigator.pop(context);
                 },
               ),

@@ -1,69 +1,64 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:up_todo/ui/create_category_screen/create_category_screen.dart';
+import 'package:up_todo/ui/home_screen/widgets/category_model.dart';
 import 'package:up_todo/ui/widgets/custom_primary_button.dart';
 import 'package:up_todo/utils/constants/app_colors.dart';
 import 'package:up_todo/utils/constants/app_texts.dart';
 
-class TaskPriorityExample extends StatefulWidget {
-  const TaskPriorityExample({super.key});
+class TaskCategorySheet extends StatefulWidget {
+  const TaskCategorySheet({super.key});
 
   @override
-  State<TaskPriorityExample> createState() => _TaskPriorityExampleState();
+  State<TaskCategorySheet> createState() => _TaskCategorySheetState();
 }
 
-class _TaskPriorityExampleState extends State<TaskPriorityExample> {
-  int? _selectedPriority;
-
+class _TaskCategorySheetState extends State<TaskCategorySheet> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       actions: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text(
-                AppTexts.cancel,
-                style: TextStyle(color: AppColors.buttonPrimary, fontSize: 16),
-              ),
-            ),
-            CustomPrimaryButton(
-              text: AppTexts.save,
-              onPressed: () => Navigator.of(context).pop(_selectedPriority),
-            ),
-          ],
+        Center(
+          child: CustomPrimaryButton(
+            text: AppTexts.addCategory,
+            width: double.infinity,
+          ),
         ),
       ],
       backgroundColor: AppColors.secondDarkGrey,
       title: Center(
         child: Text(
-          AppTexts.taskPriority,
+          AppTexts.chooseCategory,
           style: TextStyle(color: AppColors.white),
         ),
       ),
       content: SizedBox(
-        width: 320,
-        height: 360,
+        width: 327,
+        height: 556,
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 4,
             mainAxisSpacing: 8,
             crossAxisSpacing: 8,
           ),
-          itemCount: 16,
+          itemCount: categories.length,
           itemBuilder: (context, index) {
-            final number = index + 1;
-            final isSelected = _selectedPriority == number;
             return GestureDetector(
               onTap: () {
                 setState(() {
-                  _selectedPriority = number;
+                  
                 });
+                if (categories[index].title == "Create New") {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreateCategoryScreen(),
+                    ),
+                  );
+                } else {}
               },
               child: Container(
                 decoration: BoxDecoration(
-                  color: isSelected ? AppColors.buttonPrimary : AppColors.darkGrey,
+                  color: categories[index].color.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Padding(
@@ -72,14 +67,18 @@ class _TaskPriorityExampleState extends State<TaskPriorityExample> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
-                        IconsaxPlusLinear.flag,
-                        color: Colors.white,
+                        categories[index].icon,
+                        color: categories[index].color,
                         size: 24,
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        number.toString(),
-                        style: const TextStyle(color: Colors.white, fontSize: 16),
+                        maxLines: 1,
+                        categories[index].title,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
                       ),
                     ],
                   ),

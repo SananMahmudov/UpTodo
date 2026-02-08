@@ -3,11 +3,17 @@ class AppTexts {
 
   static const heyHalal = 'Hey Halal,';
   static const username = 'Username';
+  static const categoryName = 'Category name :';
+  static const createNewCategory = 'Create new Category';
   static const description = 'Descrtiption';
   static const profile = 'Profile';
+  static const chooseCategory = 'Choose Category';
+  static const addCategory = 'Add Category';
   static const taskPriority = 'Task Priority';
   static const university = 'University';
   static const close = 'Close';
+  static const save = 'Save';
+  static const cancel = 'Cancel';
   static const homeTitle = 'What do you want to do today?';
   static const homeSubTitle = 'Tap + to add your tasks';
   static const or = 'or';
