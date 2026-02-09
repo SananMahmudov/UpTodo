@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax_plus/iconsax_plus.dart';
-import 'package:up_todo/ui/authorization_screens/login_screen/login_screen.dart';
 import 'package:up_todo/ui/home_screen/widgets/custom_bottom_nav_bar.dart';
 import 'package:up_todo/ui/profile_screen/widgets/account_tiles.dart';
 import 'package:up_todo/ui/profile_screen/widgets/setting_tile.dart';
 import 'package:up_todo/ui/profile_screen/widgets/up_todo_tiles.dart';
 import 'package:up_todo/ui/widgets/custom_primary_button.dart';
-import 'package:up_todo/ui/widgets/main_text_field.dart';
 import 'package:up_todo/utils/constants/app_colors.dart';
 import 'package:up_todo/utils/constants/app_texts.dart';
 

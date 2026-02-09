@@ -4,15 +4,24 @@ class AppTexts {
   static const heyHalal = 'Hey Halal,';
   static const username = 'Username';
   static const settings = 'Settings';
+  static const subTask = 'Sub - Task';
   static const account = 'Account';
+  static const deleteTask = 'Delete Task';
+  static const taskPriority = 'Task Priority :';
+  static const taskCategory = 'Task Category :';
+  static const taskTime = 'Task Time :';
   static const takePicture = 'Take picture';
   static const upTodo = 'Uptodo';
+  static const defaultText = 'Default';
+  static const addSubText = 'Add Sub - Task';
   static const importFromGoogleDrive = 'Import from Google Drive';
   static const importFromGallery = 'Import from gallery';
   static const logOut = 'Log out';
   static const supportUs = 'Support US';
   static const faq = 'FAQ';
   static const edit = 'Edit';
+  
+  static const editTask = 'Edit Task';
   static const newPassword = 'Enter new password';
   static const newImage = 'Change account Image';
   static const oldPassword = 'Enter old password';
@@ -35,7 +44,6 @@ class AppTexts {
   static const profile = 'Profile';
   static const chooseCategory = 'Choose Category';
   static const addCategory = 'Add Category';
-  static const taskPriority = 'Task Priority';
   static const university = 'University';
   static const close = 'Close';
   static const save = 'Save';

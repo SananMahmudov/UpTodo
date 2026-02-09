@@ -14,7 +14,6 @@ class CustomPrimaryButton extends StatelessWidget {
   final double? width;
   final double? height;
   final Color? backgroundColor;
-
   final String? text;
   @override
   Widget build(BuildContext context) {

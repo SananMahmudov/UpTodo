@@ -4,7 +4,7 @@ import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:up_todo/ui/home_screen/widgets/custom_bottom_nav_bar.dart';
 import 'package:up_todo/ui/home_screen/widgets/open_bottom_sheet.dart';
 import 'package:up_todo/ui/home_screen/widgets/todo_box.dart';
-import 'package:up_todo/ui/profile_screen/profile_screen.dart';
+import 'package:up_todo/ui/task_info_screen/task_info_screen.dart';
 import 'package:up_todo/utils/constants/app_assets.dart';
 import 'package:up_todo/utils/constants/app_colors.dart';
 import 'package:up_todo/utils/constants/app_texts.dart';
@@ -120,21 +120,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     final int priority =
                         int.tryParse(task['priority'] ?? '1') ?? 1;
 
-                    return TodoBox(
-                      task: task,
-                      onPickDate: () => _pickDateForTask(index),
-                      selectedPriority:
-                          priority, // передаем выбранный приоритет
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TaskInfoScreen(),
+                          ),
+                        );
+                      },
+                      child: TodoBox(
+                        task: task,
+                        onPickDate: () => _pickDateForTask(index),
+                        selectedPriority: priority,
+                      ),
                     );
                   },
                 ),
               ),
       ),
-      bottomNavigationBar: CustomBottomNavBar(
-        onPressed: () {
-
-        },
-      ),
+      bottomNavigationBar: CustomBottomNavBar(onPressed: () {}),
     );
   }
 }

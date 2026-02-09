@@ -3,8 +3,6 @@ import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:up_todo/ui/profile_screen/widgets/change_image_sheet.dart';
 import 'package:up_todo/ui/profile_screen/widgets/change_name_dialog.dart';
 import 'package:up_todo/ui/profile_screen/widgets/change_password_dialog.dart';
-import 'package:up_todo/ui/widgets/custom_primary_button.dart';
-import 'package:up_todo/ui/widgets/main_text_field.dart';
 import 'package:up_todo/utils/constants/app_colors.dart';
 import 'package:up_todo/utils/constants/app_texts.dart';
 
