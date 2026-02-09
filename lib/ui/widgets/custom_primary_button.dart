@@ -3,10 +3,17 @@ import 'package:up_todo/utils/constants/app_colors.dart';
 import 'package:up_todo/utils/constants/app_texts.dart';
 
 class CustomPrimaryButton extends StatelessWidget {
-  const CustomPrimaryButton({super.key, this.onPressed, this.text, this.width, this.height});
+  const CustomPrimaryButton({
+    super.key,
+    this.onPressed,
+    this.text,
+    this.width,
+    this.height, this.backgroundColor,
+  });
   final Function()? onPressed;
   final double? width;
   final double? height;
+  final Color? backgroundColor;
 
   final String? text;
   @override
@@ -16,7 +23,7 @@ class CustomPrimaryButton extends StatelessWidget {
       height: height,
       child: TextButton(
         style: TextButton.styleFrom(
-          backgroundColor: AppColors.buttonPrimary,
+          backgroundColor: backgroundColor ?? AppColors.buttonPrimary,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         ),

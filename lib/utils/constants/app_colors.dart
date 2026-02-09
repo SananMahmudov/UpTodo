@@ -13,6 +13,7 @@ class AppColors {
   static const Color lightGrey = Color(0XFFAFAFAF);
   static const Color lightGrey2 = Color(0XFFFFFFFF);
   static const Color darkGrey = Color(0xff363636);
+  static const Color redError = Color(0xffFF4949);
   static const Color inputColor = Color(0xff1D1D1D);
   static const Color inputWordsColor = Color(0xff979797);
 }

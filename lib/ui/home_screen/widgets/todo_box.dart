@@ -54,7 +54,7 @@ class TodoBox extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // Дата задачи
+                        
                         Text(
                           _formatDate(task['date']),
                           style: const TextStyle(
@@ -64,7 +64,7 @@ class TodoBox extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            // Блок University с иконкой
+                            
                             Container(
                               decoration: BoxDecoration(
                                 color: AppColors.buttonPrimary,
@@ -93,7 +93,7 @@ class TodoBox extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 12),
-                            // Флаг с приоритетом
+                            
                             Container(
                               height: 28,
                               width: 42,

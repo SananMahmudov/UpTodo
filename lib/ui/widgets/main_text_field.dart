@@ -9,10 +9,11 @@ class MainTextField extends StatefulWidget {
     this.isPassword,
     this.hintText,
     this.suffixIcon,
-    this.controller,
+    this.controller, this.fillColor,
   });
 
   final String? hintText;
+  final Color? fillColor;
   final bool? isActive;
   final Widget? suffixIcon;
   final bool? isPassword;
@@ -38,7 +39,7 @@ class _MainTextFieldState extends State<MainTextField> {
           borderSide: BorderSide(color: AppColors.inputWordsColor),
         ),
 
-        fillColor: AppColors.inputColor,
+        fillColor: widget.fillColor ?? AppColors.inputColor,
         filled: true,
         hintText: widget.hintText ?? AppTexts.enterYourUsername,
       ),

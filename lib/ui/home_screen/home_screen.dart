@@ -4,6 +4,7 @@ import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:up_todo/ui/home_screen/widgets/custom_bottom_nav_bar.dart';
 import 'package:up_todo/ui/home_screen/widgets/open_bottom_sheet.dart';
 import 'package:up_todo/ui/home_screen/widgets/todo_box.dart';
+import 'package:up_todo/ui/profile_screen/profile_screen.dart';
 import 'package:up_todo/utils/constants/app_assets.dart';
 import 'package:up_todo/utils/constants/app_colors.dart';
 import 'package:up_todo/utils/constants/app_texts.dart';
@@ -28,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
               'title': title,
               'description': description,
               if (date != null) 'date': date.toIso8601String(),
-              'priority': priority.toString(), 
+              'priority': priority.toString(),
             });
           });
         },
@@ -129,7 +130,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
       ),
-      bottomNavigationBar: CustomBottomNavBar(),
+      bottomNavigationBar: CustomBottomNavBar(
+        onPressed: () {
+
+        },
+      ),
     );
   }
 }
