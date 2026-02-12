@@ -22,7 +22,9 @@ class TaskInfoScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(4),
             ),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               icon: Icon(
                 IconsaxPlusLinear.close_circle,
                 color: AppColors.white,

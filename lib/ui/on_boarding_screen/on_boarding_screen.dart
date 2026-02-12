@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:up_todo/ui/authorization_screens/login_screen/login_screen.dart';
 import 'package:up_todo/ui/on_boarding_screen/widgets/custom_back_button.dart';
 import 'package:up_todo/ui/on_boarding_screen/widgets/custom_next_button.dart';
@@ -18,6 +19,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final PageController _pageController = PageController();
   int currentIndex = 0;
 
+  Future<void> _completeOnboarding() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('OnBoardingCompleted', true);
+  }
+
+  void _goToLogin() {
+    _completeOnboarding(); 
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const LoginScreen()),
+    );
+  }
+
   void _nextPage() {
     if (currentIndex < onBoardingList.length - 1) {
       _pageController.nextPage(
@@ -25,10 +39,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const LoginScreen()),
-      );
+      _goToLogin(); 
     }
   }
 
@@ -47,12 +58,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       appBar: AppBar(
         actions: [
           TextButton(
-            onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (_) => const LoginScreen()),
-              );
-            },
+            onPressed: _goToLogin, 
             child: const Text(
               AppTexts.skip,
               style: TextStyle(color: AppColors.lightGrey),

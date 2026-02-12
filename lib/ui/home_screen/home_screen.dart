@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:up_todo/ui/home_screen/widgets/custom_bottom_nav_bar.dart';
 import 'package:up_todo/ui/home_screen/widgets/open_bottom_sheet.dart';
 import 'package:up_todo/ui/home_screen/widgets/todo_box.dart';
@@ -17,11 +19,46 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<Map<String, String>> tasks = [];
+  List<Map<String, String>> tasks = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadTasks();
+  }
+
+  // Загрузка задач из памяти
+  Future<void> _loadTasks() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? tasksString = prefs.getString('saved_tasks');
+    if (tasksString != null) {
+      setState(() {
+        final List<dynamic> decodedList = jsonDecode(tasksString);
+        tasks = decodedList
+            .map((item) => Map<String, String>.from(item))
+            .toList();
+      });
+    }
+  }
+
+  // Сохранение задач в память
+  Future<void> _saveTasks() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String encodedData = jsonEncode(tasks);
+    await prefs.setString('saved_tasks', encodedData);
+  }
+
+  void _deleteTask(int index) {
+    setState(() {
+      tasks.removeAt(index);
+    });
+    _saveTasks();
+  }
 
   void _openBottomSheet() {
     showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       builder: (_) => OpenBottomSheet(
         onSend: (title, description, date, priority) {
           setState(() {
@@ -32,36 +69,10 @@ class _HomeScreenState extends State<HomeScreen> {
               'priority': priority.toString(),
             });
           });
+          _saveTasks();
         },
       ),
     );
-  }
-
-  Future<void> _pickDateForTask(int index) async {
-    final DateTime? date = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2020),
-      lastDate: DateTime(2030),
-      builder: (context, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: const ColorScheme.dark(
-              primary: AppColors.buttonPrimary,
-              onPrimary: Colors.white,
-              onSurface: Colors.white,
-            ),
-          ),
-          child: child!,
-        );
-      },
-    );
-
-    if (date != null) {
-      setState(() {
-        tasks[index]['date'] = date.toIso8601String();
-      });
-    }
   }
 
   @override
@@ -74,72 +85,91 @@ class _HomeScreenState extends State<HomeScreen> {
         child: const Icon(Icons.add, color: Colors.white),
       ),
       appBar: AppBar(
-        leading: Icon(IconsaxPlusLinear.sort, color: AppColors.white),
-        title: Text(
+        leading: const Icon(IconsaxPlusLinear.sort, color: AppColors.white),
+        title: const Text(
           AppTexts.index,
-          style: const TextStyle(color: AppColors.white),
+          style: TextStyle(color: AppColors.white),
         ),
-        actions: const [CircleAvatar()],
+        actions: const [
+          Padding(padding: EdgeInsets.only(right: 16), child: CircleAvatar()),
+        ],
       ),
       body: SafeArea(
         child: tasks.isEmpty
-            ? ListView(
-                children: [
-                  const SizedBox(height: 74),
-                  SvgPicture.asset(AppAssets.homeImage),
-                  const SizedBox(height: 10),
-                  Center(
-                    child: Column(
-                      children: [
-                        Text(
-                          AppTexts.homeTitle,
-                          style: const TextStyle(
-                            color: AppColors.white,
-                            fontSize: 20,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          AppTexts.homeSubTitle,
-                          style: const TextStyle(
-                            color: AppColors.white,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              )
-            : Padding(
+            ? _buildEmptyState()
+            : ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: ListView.builder(
-                  itemCount: tasks.length,
-                  itemBuilder: (context, index) {
-                    final task = tasks[index];
-                    final int priority =
-                        int.tryParse(task['priority'] ?? '1') ?? 1;
+                itemCount: tasks.length,
+                itemBuilder: (context, index) {
+                  final task = tasks[index];
+                  final int priority =
+                      int.tryParse(task['priority'] ?? '1') ?? 1;
 
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => TaskInfoScreen(),
-                          ),
-                        );
-                      },
-                      child: TodoBox(
-                        task: task,
-                        onPickDate: () => _pickDateForTask(index),
-                        selectedPriority: priority,
+                  return Padding(
+                    padding: const EdgeInsets.only(
+                      top: 16,
+                    ), 
+                    child: Dismissible(
+                      key: Key(task['title']! + index.toString()),
+                      direction: DismissDirection.endToStart,
+                      background: Container(
+                        alignment: Alignment.centerRight,
+                        padding: const EdgeInsets.only(right: 20),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(
+                            8,
+                          ), 
+                        ),
+                        child: const Icon(Icons.delete, color: Colors.white),
                       ),
-                    );
-                  },
-                ),
+                      onDismissed: (direction) => _deleteTask(index),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const TaskInfoScreen(),
+                            ),
+                          );
+                        },
+                        child: TodoBox(
+                          task: task,
+                          onPickDate: () {},
+                          selectedPriority: priority,
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
       ),
       bottomNavigationBar: CustomBottomNavBar(onPressed: () {}),
+    );
+  }
+
+  Widget _buildEmptyState() {
+    return ListView(
+      children: [
+        const SizedBox(height: 74),
+        SvgPicture.asset(AppAssets.homeImage),
+        const SizedBox(height: 10),
+        const Center(
+          child: Column(
+            children: [
+              Text(
+                AppTexts.homeTitle,
+                style: TextStyle(color: AppColors.white, fontSize: 20),
+              ),
+              SizedBox(height: 10),
+              Text(
+                AppTexts.homeSubTitle,
+                style: TextStyle(color: AppColors.white, fontSize: 16),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

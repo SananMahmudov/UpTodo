@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:up_todo/utils/constants/app_colors.dart';
-import 'package:up_todo/utils/constants/app_assets.dart';
 
 class TodoBox extends StatelessWidget {
   const TodoBox({
@@ -18,120 +16,118 @@ class TodoBox extends StatelessWidget {
 
   String _formatDate(String? isoDate) {
     if (isoDate == null) return 'No date';
-    final date = DateTime.parse(isoDate);
-    return "${date.day}/${date.month} ${date.hour}:${date.minute.toString().padLeft(2, '0')}";
+    try {
+      final date = DateTime.parse(isoDate);
+      return "${date.day}/${date.month} ${date.hour}:${date.minute.toString().padLeft(2, '0')}";
+    } catch (e) {
+      return 'Invalid date';
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 16),
-        Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: AppColors.darkGrey,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Icon(Icons.circle_outlined, color: AppColors.white),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+      decoration: BoxDecoration(
+        color: AppColors.darkGrey,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const Icon(Icons.circle_outlined, color: AppColors.white, size: 24),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  task['title'] ?? '',
+                  style: const TextStyle(
+                    color: AppColors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      task['title']!,
+                      _formatDate(task['date']),
                       style: const TextStyle(
-                        color: AppColors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                        color: Color(0xFFAFAFAF),
+                        fontSize: 12,
                       ),
                     ),
-                    const SizedBox(height: 6),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        
-                        Text(
-                          _formatDate(task['date']),
-                          style: const TextStyle(
-                            color: AppColors.grey,
-                            fontSize: 12,
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.buttonPrimary,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(
+                                Icons.work_outline,
+                                size: 14,
+                                color: Colors.white,
+                              ),
+                              const SizedBox(width: 4),
+                              const Text(
+                                'University',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        Row(
-                          children: [
-                            
-                            Container(
-                              decoration: BoxDecoration(
-                                color: AppColors.buttonPrimary,
-                                borderRadius: BorderRadius.circular(4),
+                        const SizedBox(width: 12),
+
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: AppColors.buttonPrimary),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(
+                                IconsaxPlusLinear.flag,
+                                size: 14,
+                                color: Colors.white,
                               ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                                vertical: 4,
-                              ),
-                              child: Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    AppAssets.schoolLogo,
-                                    width: 16,
-                                    height: 16,
-                                  ),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                    'University',
-                                    style: const TextStyle(
-                                      color: AppColors.white,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            
-                            Container(
-                              height: 28,
-                              width: 42,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: AppColors.buttonPrimary,
+                              const SizedBox(width: 4),
+                              Text(
+                                selectedPriority.toString(),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
                                 ),
-                                borderRadius: BorderRadius.circular(4),
                               ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    IconsaxPlusLinear.flag,
-                                    size: 14,
-                                    color: AppColors.white,
-                                  ),
-                                  const SizedBox(width: 2),
-                                  Text(
-                                    selectedPriority.toString(),
-                                    style: const TextStyle(
-                                      color: AppColors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

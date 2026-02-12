@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:up_todo/ui/home_screen/home_screen.dart';
 import 'package:up_todo/ui/profile_screen/profile_screen.dart';
 import 'package:up_todo/utils/constants/app_colors.dart';
 import 'package:up_todo/utils/constants/app_texts.dart';
@@ -22,7 +23,14 @@ class CustomBottomNavBar extends StatelessWidget {
             Column(
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomeScreen(),
+                      ),
+                    );
+                  },
                   icon: Icon(
                     IconsaxPlusBold.home_2,
                     color: AppColors.white,
