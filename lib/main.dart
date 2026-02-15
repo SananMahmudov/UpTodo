@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:up_todo/ui/splash_screen/splash_screen.dart';
+import 'package:up_todo/ui/splash_screen/widgets/splash_provider.dart';
 import 'package:up_todo/utils/constants/app_colors.dart';
 
 void main() {
@@ -21,7 +23,10 @@ class MyApp extends StatelessWidget {
           backgroundColor: AppColors.backgroundColor,
         ),
       ),
-      home: SplashScreen(),
+      home: ChangeNotifierProvider(
+        create: (context) => SplashProvider(),
+        child: SplashScreen(),
+      ),
     );
   }
 }

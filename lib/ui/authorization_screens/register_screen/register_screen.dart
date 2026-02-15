@@ -9,14 +9,9 @@ import 'package:up_todo/utils/constants/app_assets.dart';
 import 'package:up_todo/utils/constants/app_colors.dart';
 import 'package:up_todo/utils/constants/app_texts.dart';
 
-class RegisterScreen extends StatefulWidget {
+class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key, this.controller});
   final TextEditingController? controller;
-  @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
-}
-
-class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

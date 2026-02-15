@@ -1,75 +1,36 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 import 'package:up_todo/ui/home_screen/widgets/custom_bottom_nav_bar.dart';
 import 'package:up_todo/ui/home_screen/widgets/open_bottom_sheet.dart';
+import 'package:up_todo/ui/home_screen/widgets/task_provider.dart';
 import 'package:up_todo/ui/home_screen/widgets/todo_box.dart';
 import 'package:up_todo/ui/task_info_screen/task_info_screen.dart';
 import 'package:up_todo/utils/constants/app_assets.dart';
 import 'package:up_todo/utils/constants/app_colors.dart';
 import 'package:up_todo/utils/constants/app_texts.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:iconsax_plus/iconsax_plus.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  List<Map<String, String>> tasks = [];
-
-  @override
-  void initState() {
-    super.initState();
-    _loadTasks();
-  }
-
-  // Загрузка задач из памяти
-  Future<void> _loadTasks() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String? tasksString = prefs.getString('saved_tasks');
-    if (tasksString != null) {
-      setState(() {
-        final List<dynamic> decodedList = jsonDecode(tasksString);
-        tasks = decodedList
-            .map((item) => Map<String, String>.from(item))
-            .toList();
-      });
-    }
-  }
-
-  // Сохранение задач в память
-  Future<void> _saveTasks() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String encodedData = jsonEncode(tasks);
-    await prefs.setString('saved_tasks', encodedData);
-  }
-
-  void _deleteTask(int index) {
-    setState(() {
-      tasks.removeAt(index);
-    });
-    _saveTasks();
-  }
-
-  void _openBottomSheet() {
+  void _openBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       builder: (_) => OpenBottomSheet(
         onSend: (title, description, date, priority) {
-          setState(() {
-            tasks.add({
-              'title': title,
-              'description': description,
-              if (date != null) 'date': date.toIso8601String(),
-              'priority': priority.toString(),
-            });
-          });
-          _saveTasks();
+          context.read<TaskProvider>().addTask(
+            title: title,
+            description: description,
+            date: date,
+            priority: priority,
+          );
+          Navigator.pop(context);
         },
       ),
     );
@@ -77,11 +38,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final taskProvider = context.watch<TaskProvider>();
+    final tasks = taskProvider.tasks;
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.buttonPrimary,
         shape: const CircleBorder(),
-        onPressed: _openBottomSheet,
+        onPressed: () => _openBottomSheet(context),
         child: const Icon(Icons.add, color: Colors.white),
       ),
       appBar: AppBar(
@@ -106,24 +70,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       int.tryParse(task['priority'] ?? '1') ?? 1;
 
                   return Padding(
-                    padding: const EdgeInsets.only(
-                      top: 16,
-                    ), 
+                    padding: const EdgeInsets.only(top: 16),
                     child: Dismissible(
-                      key: Key(task['title']! + index.toString()),
+                      key: ValueKey(task['title']! + index.toString()),
                       direction: DismissDirection.endToStart,
                       background: Container(
                         alignment: Alignment.centerRight,
                         padding: const EdgeInsets.only(right: 20),
                         decoration: BoxDecoration(
                           color: Colors.red,
-                          borderRadius: BorderRadius.circular(
-                            8,
-                          ), 
+                          borderRadius: BorderRadius.circular(8),
                         ),
                         child: const Icon(Icons.delete, color: Colors.white),
                       ),
-                      onDismissed: (direction) => _deleteTask(index),
+                      onDismissed: (_) => taskProvider.deleteTask(index),
                       child: GestureDetector(
                         onTap: () {
                           Navigator.push(

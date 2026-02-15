@@ -141,14 +141,20 @@ class TaskInfoScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 30),
-                  ListTile(
-                    leading: Icon(
-                      IconsaxPlusLinear.trash,
-                      color: AppColors.redError,
-                    ),
-                    title: Text(
-                      AppTexts.deleteTask,
-                      style: TextStyle(color: AppColors.redError, fontSize: 16),
+                  GestureDetector(
+                    onTap: () {},
+                    child: ListTile(
+                      leading: Icon(
+                        IconsaxPlusLinear.trash,
+                        color: AppColors.redError,
+                      ),
+                      title: Text(
+                        AppTexts.deleteTask,
+                        style: TextStyle(
+                          color: AppColors.redError,
+                          fontSize: 16,
+                        ),
+                      ),
                     ),
                   ),
                 ],
