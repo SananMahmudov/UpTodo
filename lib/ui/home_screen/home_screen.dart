@@ -10,10 +10,6 @@ import 'package:up_todo/ui/task_info_screen/task_info_screen.dart';
 import 'package:up_todo/utils/constants/app_assets.dart';
 import 'package:up_todo/utils/constants/app_colors.dart';
 import 'package:up_todo/utils/constants/app_texts.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:iconsax_plus/iconsax_plus.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
