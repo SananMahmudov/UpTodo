@@ -10,7 +10,6 @@ import 'package:up_todo/ui/task_info_screen/task_info_screen.dart';
 import 'package:up_todo/utils/constants/app_assets.dart';
 import 'package:up_todo/utils/constants/app_colors.dart';
 import 'package:up_todo/utils/constants/app_texts.dart';
-
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -26,7 +25,6 @@ class HomeScreen extends StatelessWidget {
             date: date,
             priority: priority,
           );
-          Navigator.pop(context);
         },
       ),
     );

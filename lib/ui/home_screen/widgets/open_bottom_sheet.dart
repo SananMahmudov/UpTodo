@@ -24,7 +24,7 @@ class _OpenBottomSheetState extends State<OpenBottomSheet> {
   String title = '';
   String description = '';
   DateTime? selectedDate;
-  int _priority = 1; // по умолчанию
+  int _priority = 1; 
 
   Future<void> _pickDate() async {
     final DateTime? picked = await showDatePicker(

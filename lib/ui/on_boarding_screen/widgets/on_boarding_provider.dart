@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'onboarding_data.dart';
 
-class OnBoardingProvider with ChangeNotifier {
+class OnBoardingProvider extends ChangeNotifier {
   final PageController pageController = PageController();
   int _currentIndex = 0;
 
