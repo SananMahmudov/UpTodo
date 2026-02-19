@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class TaskProvider with ChangeNotifier {
+class TaskProvider extends ChangeNotifier {
   List<Map<String, String>> _tasks = [];
 
   List<Map<String, String>> get tasks => _tasks;
@@ -35,10 +35,9 @@ class TaskProvider with ChangeNotifier {
       if (date != null) 'date': date.toIso8601String(),
       'priority': priority.toString(),
     });
-    saveTasks(); // Твой метод сохранения
+    saveTasks();
   }
 
-  // Сохранение задач в память
   Future<void> saveTasks() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String encodedData = jsonEncode(tasks);

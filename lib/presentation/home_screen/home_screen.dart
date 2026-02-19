@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:provider/provider.dart';
+import 'package:up_todo/core/constants/constants/app_assets.dart';
+import 'package:up_todo/core/constants/constants/app_colors.dart';
+import 'package:up_todo/core/constants/constants/app_texts.dart';
 import 'package:up_todo/presentation/home_screen/widgets/custom_bottom_nav_bar.dart';
 import 'package:up_todo/presentation/home_screen/widgets/open_bottom_sheet.dart';
 import 'package:up_todo/presentation/home_screen/widgets/task_provider.dart';
 import 'package:up_todo/presentation/home_screen/widgets/todo_box.dart';
 import 'package:up_todo/presentation/task_info_screen/task_info_screen.dart';
-import 'package:up_todo/core/constants/constants/app_assets.dart';
-import 'package:up_todo/core/constants/constants/app_colors.dart';
-import 'package:up_todo/core/constants/constants/app_texts.dart';
-
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -26,7 +25,6 @@ class HomeScreen extends StatelessWidget {
             date: date,
             priority: priority,
           );
-          Navigator.pop(context);
         },
       ),
     );
@@ -64,7 +62,6 @@ class HomeScreen extends StatelessWidget {
                   final task = tasks[index];
                   final int priority =
                       int.tryParse(task['priority'] ?? '1') ?? 1;
-
                   return Padding(
                     padding: const EdgeInsets.only(top: 16),
                     child: Dismissible(
