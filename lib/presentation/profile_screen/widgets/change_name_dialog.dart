@@ -1,27 +1,20 @@
-
 import 'package:flutter/material.dart';
+import 'package:up_todo/l10n/app_localizations.dart';
 import 'package:up_todo/presentation/widgets/custom_primary_button.dart';
 import 'package:up_todo/presentation/widgets/main_text_field.dart';
 import 'package:up_todo/core/constants/constants/app_colors.dart';
-import 'package:up_todo/core/constants/constants/app_texts.dart';
 
 class ChangeNameDialog extends StatelessWidget {
-  const ChangeNameDialog({
-    super.key,
-  });
+  const ChangeNameDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       backgroundColor: AppColors.darkGrey,
       title: Center(
-        child: Text(
-          AppTexts.accountName,
-          style: TextStyle(color: AppColors.white),
-        ),
+        child: Text(l10n.accountName, style: TextStyle(color: AppColors.white)),
       ),
       content: SizedBox(
         height: 186,
@@ -32,7 +25,7 @@ class ChangeNameDialog extends StatelessWidget {
             Divider(),
             SizedBox(height: 16),
             MainTextField(
-              hintText: AppTexts.usernameExample,
+              hintText: l10n.usernameExample,
               fillColor: AppColors.darkGrey,
             ),
           ],
@@ -47,13 +40,13 @@ class ChangeNameDialog extends StatelessWidget {
                 Navigator.pop(context);
               },
               child: Text(
-                AppTexts.cancel,
+                l10n.cancel,
                 style: TextStyle(color: AppColors.buttonPrimary),
               ),
             ),
             CustomPrimaryButton(
               backgroundColor: AppColors.buttonPrimary,
-              text: AppTexts.edit,
+              text: l10n.edit,
             ),
           ],
         ),

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:up_todo/l10n/app_localizations.dart';
 import 'package:up_todo/presentation/widgets/custom_primary_button.dart';
 import 'package:up_todo/core/constants/constants/app_colors.dart';
-import 'package:up_todo/core/constants/constants/app_texts.dart';
 
 class TaskInfoScreen extends StatelessWidget {
   const TaskInfoScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 100,
@@ -87,7 +88,7 @@ class TaskInfoScreen extends StatelessWidget {
                       color: AppColors.white,
                     ),
                     title: Text(
-                      AppTexts.taskTime,
+                      l10n.taskTime,
                       style: TextStyle(color: AppColors.white, fontSize: 16),
                     ),
                     trailing: CustomPrimaryButton(
@@ -102,7 +103,7 @@ class TaskInfoScreen extends StatelessWidget {
                       color: AppColors.white,
                     ),
                     title: Text(
-                      AppTexts.taskCategory,
+                      l10n.taskCategory,
                       style: TextStyle(color: AppColors.white, fontSize: 16),
                     ),
                     trailing: CustomPrimaryButton(
@@ -117,11 +118,11 @@ class TaskInfoScreen extends StatelessWidget {
                       color: AppColors.white,
                     ),
                     title: Text(
-                      AppTexts.taskPriority,
+                      l10n.taskPriority,
                       style: TextStyle(color: AppColors.white, fontSize: 16),
                     ),
                     trailing: CustomPrimaryButton(
-                      text: AppTexts.defaultText,
+                      text: l10n.defaultText,
                       backgroundColor: AppColors.secondDarkGrey,
                     ),
                   ),
@@ -132,11 +133,11 @@ class TaskInfoScreen extends StatelessWidget {
                       color: AppColors.white,
                     ),
                     title: Text(
-                      AppTexts.subTask,
+                      l10n.subTask,
                       style: TextStyle(color: AppColors.white, fontSize: 16),
                     ),
                     trailing: CustomPrimaryButton(
-                      text: AppTexts.addSubText,
+                      text: l10n.addSubText,
                       backgroundColor: AppColors.secondDarkGrey,
                     ),
                   ),
@@ -149,7 +150,7 @@ class TaskInfoScreen extends StatelessWidget {
                         color: AppColors.redError,
                       ),
                       title: Text(
-                        AppTexts.deleteTask,
+                        l10n.deleteTask,
                         style: TextStyle(
                           color: AppColors.redError,
                           fontSize: 16,
@@ -165,7 +166,7 @@ class TaskInfoScreen extends StatelessWidget {
               child: CustomPrimaryButton(
                 height: 48,
                 width: double.infinity,
-                text: AppTexts.editTask,
+                text: l10n.editTask,
                 backgroundColor: AppColors.buttonPrimary,
               ),
             ),

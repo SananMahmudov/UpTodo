@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:up_todo/core/constants/constants/app_colors.dart';
-import 'package:up_todo/core/constants/constants/app_texts.dart';
+import 'package:up_todo/l10n/app_localizations.dart';
 
 class LoginWithButton extends StatelessWidget {
   const LoginWithButton({super.key, required this.logo, this.title});
@@ -10,6 +10,7 @@ class LoginWithButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return SizedBox(
       height: 50,
       child: OutlinedButton(
@@ -26,7 +27,7 @@ class LoginWithButton extends StatelessWidget {
             SvgPicture.asset(logo),
             SizedBox(width: 10),
             Text(
-              title ?? AppTexts.loginGoogle,
+              title ?? l10n.loginGoogle,
               style: TextStyle(color: AppColors.white, fontSize: 16),
             ),
           ],

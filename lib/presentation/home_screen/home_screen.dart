@@ -4,12 +4,13 @@ import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:up_todo/core/constants/constants/app_assets.dart';
 import 'package:up_todo/core/constants/constants/app_colors.dart';
-import 'package:up_todo/core/constants/constants/app_texts.dart';
-import 'package:up_todo/presentation/home_screen/widgets/custom_bottom_nav_bar.dart';
+import 'package:up_todo/l10n/app_localizations.dart';
+import 'package:up_todo/widgets/custom_bottom_nav_bar.dart';
 import 'package:up_todo/presentation/home_screen/widgets/open_bottom_sheet.dart';
 import 'package:up_todo/presentation/home_screen/widgets/task_provider.dart';
 import 'package:up_todo/presentation/home_screen/widgets/todo_box.dart';
 import 'package:up_todo/presentation/task_info_screen/task_info_screen.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -32,6 +33,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final taskProvider = context.watch<TaskProvider>();
     final tasks = taskProvider.tasks;
 
@@ -44,17 +46,14 @@ class HomeScreen extends StatelessWidget {
       ),
       appBar: AppBar(
         leading: const Icon(IconsaxPlusLinear.sort, color: AppColors.white),
-        title: const Text(
-          AppTexts.index,
-          style: TextStyle(color: AppColors.white),
-        ),
+        title: Text(l10n.index, style: TextStyle(color: AppColors.white)),
         actions: const [
           Padding(padding: EdgeInsets.only(right: 16), child: CircleAvatar()),
         ],
       ),
       body: SafeArea(
         child: tasks.isEmpty
-            ? _buildEmptyState()
+            ? _buildEmptyState(context)
             : ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 itemCount: tasks.length,
@@ -101,22 +100,23 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildEmptyState() {
+  Widget _buildEmptyState(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return ListView(
       children: [
         const SizedBox(height: 74),
         SvgPicture.asset(AppAssets.homeImage),
         const SizedBox(height: 10),
-        const Center(
+        Center(
           child: Column(
             children: [
               Text(
-                AppTexts.homeTitle,
-                style: TextStyle(color: AppColors.white, fontSize: 20),
+                l10n.homeTitle,
+                style: const TextStyle(color: AppColors.white, fontSize: 20),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
-                AppTexts.homeSubTitle,
+                l10n.homeSubTitle,
                 style: TextStyle(color: AppColors.white, fontSize: 16),
               ),
             ],

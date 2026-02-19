@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:up_todo/l10n/app_localizations.dart';
 import 'package:up_todo/presentation/profile_screen/widgets/change_image_sheet.dart';
 import 'package:up_todo/presentation/profile_screen/widgets/change_name_dialog.dart';
 import 'package:up_todo/presentation/profile_screen/widgets/change_password_dialog.dart';
 import 'package:up_todo/core/constants/constants/app_colors.dart';
-import 'package:up_todo/core/constants/constants/app_texts.dart';
 
 class AccountTiles extends StatelessWidget {
   const AccountTiles({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         GestureDetector(
@@ -25,7 +26,7 @@ class AccountTiles extends StatelessWidget {
           child: ListTile(
             leading: Icon(IconsaxPlusLinear.user, color: AppColors.white),
             title: Text(
-              AppTexts.accountName,
+              l10n.accountName,
               style: TextStyle(color: AppColors.white, fontSize: 16),
             ),
             trailing: Icon(
@@ -47,7 +48,7 @@ class AccountTiles extends StatelessWidget {
           child: ListTile(
             leading: Icon(IconsaxPlusLinear.key, color: AppColors.white),
             title: Text(
-              AppTexts.accountPassword,
+              l10n.accountPassword,
               style: TextStyle(color: AppColors.white, fontSize: 16),
             ),
             trailing: Icon(
@@ -69,7 +70,7 @@ class AccountTiles extends StatelessWidget {
           child: ListTile(
             leading: Icon(IconsaxPlusLinear.camera, color: AppColors.white),
             title: Text(
-              AppTexts.accountImage,
+              l10n.accountImage,
               style: TextStyle(color: AppColors.white, fontSize: 16),
             ),
             trailing: Icon(

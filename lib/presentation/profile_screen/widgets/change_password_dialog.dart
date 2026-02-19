@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:up_todo/l10n/app_localizations.dart';
 import 'package:up_todo/presentation/widgets/custom_primary_button.dart';
 import 'package:up_todo/presentation/widgets/main_text_field.dart';
 import 'package:up_todo/core/constants/constants/app_colors.dart';
-import 'package:up_todo/core/constants/constants/app_texts.dart';
 
 class ChangePasswordDialog extends StatelessWidget {
   const ChangePasswordDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       backgroundColor: AppColors.darkGrey,
       title: Center(
         child: Text(
-          AppTexts.accountPassword,
+          l10n.accountPassword,
           style: TextStyle(color: AppColors.white),
         ),
       ),
@@ -28,25 +29,25 @@ class ChangePasswordDialog extends StatelessWidget {
             Divider(),
             SizedBox(height: 16),
             Text(
-              AppTexts.oldPassword,
+              l10n.oldPassword,
               style: TextStyle(color: AppColors.white, fontSize: 14),
             ),
             SizedBox(height: 8),
             MainTextField(
               isPassword: true,
-              hintText: AppTexts.passwordHintText,
+              hintText: l10n.passwordHintText,
               fillColor: AppColors.darkGrey,
             ),
             SizedBox(height: 10),
             Text(
-              AppTexts.newPassword,
+              l10n.newPassword,
               style: TextStyle(color: AppColors.white, fontSize: 14),
             ),
             SizedBox(height: 8),
 
             MainTextField(
               isPassword: true,
-              hintText: AppTexts.passwordHintText,
+              hintText: l10n.passwordHintText,
               fillColor: AppColors.darkGrey,
             ),
           ],
@@ -61,13 +62,13 @@ class ChangePasswordDialog extends StatelessWidget {
                 Navigator.pop(context);
               },
               child: Text(
-                AppTexts.cancel,
+                l10n.cancel,
                 style: TextStyle(color: AppColors.buttonPrimary),
               ),
             ),
             CustomPrimaryButton(
               backgroundColor: AppColors.buttonPrimary,
-              text: AppTexts.edit,
+              text: l10n.edit,
             ),
           ],
         ),

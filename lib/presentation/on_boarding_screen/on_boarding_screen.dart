@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:up_todo/l10n/app_localizations.dart';
 import 'package:up_todo/presentation/authorization_screens/login_screen/login_screen.dart';
 import 'package:up_todo/presentation/on_boarding_screen/widgets/custom_back_button.dart';
 import 'package:up_todo/presentation/on_boarding_screen/widgets/custom_next_button.dart';
 import 'package:up_todo/presentation/on_boarding_screen/widgets/on_boarding_main_info.dart';
 import 'package:up_todo/presentation/on_boarding_screen/widgets/on_boarding_provider.dart';
 import 'package:up_todo/core/constants/constants/app_colors.dart';
-import 'package:up_todo/core/constants/constants/app_texts.dart';
+
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final provider = context.watch<OnBoardingProvider>();
     void goToLogin() {
       provider.completeOnboarding();
@@ -27,8 +29,8 @@ class OnBoardingScreen extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: goToLogin,
-            child: const Text(
-              AppTexts.skip,
+            child:  Text(
+              l10n.skip,
               style: TextStyle(color: AppColors.lightGrey),
             ),
           ),

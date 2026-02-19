@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:up_todo/presentation/on_boarding_screen/widgets/onboarding_data.dart';
+import 'package:up_todo/presentation/on_boarding_screen/widgets/on_boarding_model.dart';
 import 'package:up_todo/presentation/on_boarding_screen/widgets/page_indicator.dart';
 import 'package:up_todo/core/constants/constants/app_colors.dart';
 

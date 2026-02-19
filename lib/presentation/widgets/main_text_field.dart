@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:up_todo/core/constants/constants/app_colors.dart';
-import 'package:up_todo/core/constants/constants/app_texts.dart';
+import 'package:up_todo/l10n/app_localizations.dart';
+
 
 class MainTextField extends StatefulWidget {
   const MainTextField({
@@ -9,7 +10,8 @@ class MainTextField extends StatefulWidget {
     this.isPassword,
     this.hintText,
     this.suffixIcon,
-    this.controller, this.fillColor,
+    this.controller,
+    this.fillColor,
   });
 
   final String? hintText;
@@ -26,6 +28,7 @@ class MainTextField extends StatefulWidget {
 class _MainTextFieldState extends State<MainTextField> {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return TextField(
       style: TextStyle(color: AppColors.white),
       obscureText: widget.isPassword ?? false,
@@ -41,7 +44,7 @@ class _MainTextFieldState extends State<MainTextField> {
 
         fillColor: widget.fillColor ?? AppColors.inputColor,
         filled: true,
-        hintText: widget.hintText ?? AppTexts.enterYourUsername,
+        hintText: widget.hintText ?? l10n.enterYourUsername,
       ),
     );
   }

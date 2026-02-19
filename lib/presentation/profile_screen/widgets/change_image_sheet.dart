@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:up_todo/core/constants/constants/app_colors.dart';
-import 'package:up_todo/core/constants/constants/app_texts.dart';
+import 'package:up_todo/l10n/app_localizations.dart';
 
 class ChangeImageSheet extends StatelessWidget {
   const ChangeImageSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       height: 260,
       decoration: BoxDecoration(
@@ -20,7 +21,7 @@ class ChangeImageSheet extends StatelessWidget {
         children: [
           SizedBox(height: 16),
           Text(
-            AppTexts.newImage,
+            l10n.newImage,
             style: TextStyle(color: AppColors.white, fontSize: 16),
           ),
           SizedBox(height: 10),
@@ -31,19 +32,19 @@ class ChangeImageSheet extends StatelessWidget {
           SizedBox(height: 16),
           ListTile(
             title: Text(
-              AppTexts.takePicture,
+              l10n.takePicture,
               style: TextStyle(color: AppColors.white),
             ),
           ),
           ListTile(
             title: Text(
-              AppTexts.importFromGallery,
+              l10n.importFromGallery,
               style: TextStyle(color: AppColors.white),
             ),
           ),
           ListTile(
             title: Text(
-              AppTexts.importFromGoogleDrive,
+              l10n.importFromGoogleDrive,
               style: TextStyle(color: AppColors.white),
             ),
           ),

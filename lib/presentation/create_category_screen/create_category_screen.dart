@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:up_todo/l10n/app_localizations.dart';
 import 'package:up_todo/presentation/home_screen/widgets/category_model.dart';
 import 'package:up_todo/presentation/widgets/custom_primary_button.dart';
 import 'package:up_todo/presentation/widgets/main_text_field.dart';
 import 'package:up_todo/core/constants/constants/app_colors.dart';
-import 'package:up_todo/core/constants/constants/app_texts.dart';
+
 
 class CreateCategoryScreen extends StatelessWidget {
   const CreateCategoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    // final localeProvider = Provider.of<LocaleProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          AppTexts.createNewCategory,
+          l10n.createNewCategory,
           style: TextStyle(color: AppColors.white),
         ),
       ),
@@ -24,7 +27,7 @@ class CreateCategoryScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                AppTexts.categoryName,
+                l10n.categoryName,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -32,10 +35,10 @@ class CreateCategoryScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 16),
-              MainTextField(hintText: AppTexts.categoryName),
+              MainTextField(hintText: l10n.categoryName),
               SizedBox(height: 20),
               Text(
-                AppTexts.categoryIcon,
+                l10n.categoryIcon,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -45,11 +48,11 @@ class CreateCategoryScreen extends StatelessWidget {
               SizedBox(height: 16),
               CustomPrimaryButton(
                 backgroundColor: AppColors.darkGrey,
-                text: AppTexts.chooseIconFromLibrary,
+                text: l10n.chooseIconFromLibrary,
               ),
               SizedBox(height: 20),
               Text(
-                AppTexts.categoryColor,
+                l10n.categoryColor,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
@@ -86,11 +89,11 @@ class CreateCategoryScreen extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     child: Text(
-                      AppTexts.cancel,
+                      l10n.cancel,
                       style: TextStyle(fontSize: 16),
                     ),
                   ),
-                  CustomPrimaryButton(text: AppTexts.createCategory),
+                  CustomPrimaryButton(text: l10n.createCategory),
                 ],
               ),
             ],

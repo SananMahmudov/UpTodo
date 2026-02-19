@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:up_todo/l10n/app_localizations.dart';
 import 'package:up_todo/presentation/widgets/custom_primary_button.dart';
 import 'package:up_todo/core/constants/constants/app_colors.dart';
-import 'package:up_todo/core/constants/constants/app_texts.dart';
+
 
 class TaskPriorityExample extends StatefulWidget {
   const TaskPriorityExample({super.key});
@@ -16,6 +17,7 @@ class _TaskPriorityExampleState extends State<TaskPriorityExample> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return AlertDialog(
       actions: [
         Row(
@@ -24,12 +26,12 @@ class _TaskPriorityExampleState extends State<TaskPriorityExample> {
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
               child: Text(
-                AppTexts.cancel,
+                l10n.cancel,
                 style: TextStyle(color: AppColors.buttonPrimary, fontSize: 16),
               ),
             ),
             CustomPrimaryButton(
-              text: AppTexts.save,
+              text: l10n.save,
               onPressed: () => Navigator.of(context).pop(_selectedPriority),
             ),
           ],
@@ -38,7 +40,7 @@ class _TaskPriorityExampleState extends State<TaskPriorityExample> {
       backgroundColor: AppColors.secondDarkGrey,
       title: Center(
         child: Text(
-          AppTexts.taskPriority,
+          l10n.taskPriority,
           style: TextStyle(color: AppColors.white),
         ),
       ),
@@ -63,7 +65,9 @@ class _TaskPriorityExampleState extends State<TaskPriorityExample> {
               },
               child: Container(
                 decoration: BoxDecoration(
-                  color: isSelected ? AppColors.buttonPrimary : AppColors.darkGrey,
+                  color: isSelected
+                      ? AppColors.buttonPrimary
+                      : AppColors.darkGrey,
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Padding(
@@ -79,7 +83,10 @@ class _TaskPriorityExampleState extends State<TaskPriorityExample> {
                       const SizedBox(height: 4),
                       Text(
                         number.toString(),
-                        style: const TextStyle(color: Colors.white, fontSize: 16),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
                       ),
                     ],
                   ),

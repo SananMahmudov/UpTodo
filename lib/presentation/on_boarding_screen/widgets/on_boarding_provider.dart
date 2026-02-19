@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'onboarding_data.dart';
+import 'package:up_todo/presentation/on_boarding_screen/widgets/on_boarding_model.dart';
+
 
 class OnBoardingProvider extends ChangeNotifier {
   final PageController pageController = PageController();

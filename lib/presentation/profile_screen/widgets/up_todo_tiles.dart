@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:up_todo/l10n/app_localizations.dart';
 import 'package:up_todo/presentation/authorization_screens/login_screen/login_screen.dart';
 import 'package:up_todo/core/constants/constants/app_colors.dart';
-import 'package:up_todo/core/constants/constants/app_texts.dart';
+
 
 class UpTodoTiles extends StatelessWidget {
   const UpTodoTiles({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       children: [
         ListTile(
           leading: Icon(IconsaxPlusLinear.menu_1, color: AppColors.white),
           title: Text(
-            AppTexts.aboutUs,
+            l10n.aboutUs,
             style: TextStyle(color: AppColors.white, fontSize: 16),
           ),
           trailing: Icon(
@@ -26,7 +28,7 @@ class UpTodoTiles extends StatelessWidget {
         ListTile(
           leading: Icon(IconsaxPlusLinear.info_circle, color: AppColors.white),
           title: Text(
-            AppTexts.faq,
+            l10n.faq,
             style: TextStyle(color: AppColors.white, fontSize: 16),
           ),
           trailing: Icon(
@@ -38,7 +40,7 @@ class UpTodoTiles extends StatelessWidget {
         ListTile(
           leading: Icon(IconsaxPlusLinear.flash_1, color: AppColors.white),
           title: Text(
-            AppTexts.helpFeedback,
+            l10n.helpFeedback,
             style: TextStyle(color: AppColors.white, fontSize: 16),
           ),
           trailing: Icon(
@@ -50,7 +52,7 @@ class UpTodoTiles extends StatelessWidget {
         ListTile(
           leading: Icon(IconsaxPlusLinear.like_1, color: AppColors.white),
           title: Text(
-            AppTexts.supportUs,
+            l10n.supportUs,
             style: TextStyle(color: AppColors.white, fontSize: 16),
           ),
           trailing: Icon(
@@ -69,7 +71,7 @@ class UpTodoTiles extends StatelessWidget {
           child: ListTile(
             leading: Icon(IconsaxPlusLinear.logout, color: AppColors.redError),
             title: Text(
-              AppTexts.logOut,
+              l10n.logOut,
               style: TextStyle(color: AppColors.redError, fontSize: 16),
             ),
           ),

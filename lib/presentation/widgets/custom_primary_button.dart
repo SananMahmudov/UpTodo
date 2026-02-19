@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:up_todo/core/constants/constants/app_colors.dart';
-import 'package:up_todo/core/constants/constants/app_texts.dart';
+import 'package:up_todo/l10n/app_localizations.dart';
 
 class CustomPrimaryButton extends StatelessWidget {
   const CustomPrimaryButton({
@@ -8,7 +8,8 @@ class CustomPrimaryButton extends StatelessWidget {
     this.onPressed,
     this.text,
     this.width,
-    this.height, this.backgroundColor,
+    this.height,
+    this.backgroundColor,
   });
   final Function()? onPressed;
   final double? width;
@@ -17,6 +18,7 @@ class CustomPrimaryButton extends StatelessWidget {
   final String? text;
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return SizedBox(
       width: width,
       height: height,
@@ -28,7 +30,7 @@ class CustomPrimaryButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         child: Text(
-          text ?? AppTexts.back,
+          text ?? l10n.back,
           style: const TextStyle(color: AppColors.white, fontSize: 16),
         ),
       ),

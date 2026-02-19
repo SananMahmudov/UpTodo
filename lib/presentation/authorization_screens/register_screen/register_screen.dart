@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:up_todo/l10n/app_localizations.dart';
 import 'package:up_todo/presentation/authorization_screens/login_screen/login_screen.dart';
 import 'package:up_todo/presentation/authorization_screens/widgets/additional_choise.dart';
 import 'package:up_todo/presentation/authorization_screens/widgets/or_divided.dart';
@@ -7,13 +8,13 @@ import 'package:up_todo/presentation/widgets/login_with_button.dart';
 import 'package:up_todo/presentation/widgets/main_text_field.dart';
 import 'package:up_todo/core/constants/constants/app_assets.dart';
 import 'package:up_todo/core/constants/constants/app_colors.dart';
-import 'package:up_todo/core/constants/constants/app_texts.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key, this.controller});
   final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -34,7 +35,7 @@ class RegisterScreen extends StatelessWidget {
               SizedBox(height: 40),
               Text(
                 textAlign: TextAlign.start,
-                AppTexts.register,
+                l10n.register,
                 style: TextStyle(
                   color: AppColors.white,
                   fontSize: 32,
@@ -43,36 +44,36 @@ class RegisterScreen extends StatelessWidget {
               ),
               SizedBox(height: 50),
               Text(
-                AppTexts.username,
+                l10n.username,
                 style: TextStyle(color: AppColors.white, fontSize: 16),
               ),
               SizedBox(height: 8),
               MainTextField(),
               SizedBox(height: 24),
               Text(
-                AppTexts.password,
+                l10n.password,
                 style: TextStyle(color: AppColors.white, fontSize: 16),
               ),
               SizedBox(height: 8),
               MainTextField(
                 suffixIcon: Icon(Icons.remove_red_eye_outlined),
                 isPassword: true,
-                hintText: AppTexts.passwordHintText,
+                hintText: l10n.passwordHintText,
               ),
               SizedBox(height: 24),
               Text(
-                AppTexts.confirmPassword,
+                l10n.confirmPassword,
                 style: TextStyle(color: AppColors.white, fontSize: 16),
               ),
               SizedBox(height: 8),
               MainTextField(
-                hintText: AppTexts.passwordHintText,
+                hintText: l10n.passwordHintText,
                 isPassword: true,
                 suffixIcon: Icon(Icons.remove_red_eye_outlined),
               ),
               SizedBox(height: 70),
               CustomPrimaryButton(
-                text: AppTexts.register,
+                text: l10n.register,
                 width: double.infinity,
                 height: 50,
               ),
@@ -80,18 +81,18 @@ class RegisterScreen extends StatelessWidget {
               OrDivided(),
               SizedBox(height: 30),
               LoginWithButton(
-                title: AppTexts.registerGoogle,
+                title: l10n.registerGoogle,
                 logo: AppAssets.googleLogo,
               ),
               SizedBox(height: 20),
               LoginWithButton(
-                title: AppTexts.registerApple,
+                title: l10n.registerApple,
                 logo: AppAssets.appleLogo,
               ),
               Spacer(),
               AdditionalChoise(
-                title: AppTexts.haveAccount,
-                subTitle: AppTexts.login,
+                title: l10n.haveAccount,
+                subTitle: l10n.login,
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,

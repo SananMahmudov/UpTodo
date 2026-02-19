@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:up_todo/l10n/app_localizations.dart';
 import 'package:up_todo/presentation/create_category_screen/create_category_screen.dart';
 import 'package:up_todo/presentation/home_screen/widgets/category_model.dart';
 import 'package:up_todo/presentation/widgets/custom_primary_button.dart';
 import 'package:up_todo/core/constants/constants/app_colors.dart';
-import 'package:up_todo/core/constants/constants/app_texts.dart';
+
 
 class TaskCategorySheet extends StatefulWidget {
   const TaskCategorySheet({super.key});
@@ -15,11 +16,12 @@ class TaskCategorySheet extends StatefulWidget {
 class _TaskCategorySheetState extends State<TaskCategorySheet> {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return AlertDialog(
       actions: [
         Center(
           child: CustomPrimaryButton(
-            text: AppTexts.addCategory,
+            text: l10n.addCategory,
             width: double.infinity,
           ),
         ),
@@ -27,7 +29,7 @@ class _TaskCategorySheetState extends State<TaskCategorySheet> {
       backgroundColor: AppColors.secondDarkGrey,
       title: Center(
         child: Text(
-          AppTexts.chooseCategory,
+          l10n.chooseCategory,
           style: TextStyle(color: AppColors.white),
         ),
       ),
@@ -44,9 +46,7 @@ class _TaskCategorySheetState extends State<TaskCategorySheet> {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                setState(() {
-                  
-                });
+                setState(() {});
                 if (categories[index].title == "Create New") {
                   Navigator.pushReplacement(
                     context,

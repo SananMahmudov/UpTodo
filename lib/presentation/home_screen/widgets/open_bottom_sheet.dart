@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import 'package:up_todo/l10n/app_localizations.dart';
 import 'package:up_todo/presentation/home_screen/widgets/task_category_sheet.dart';
 import 'package:up_todo/presentation/home_screen/widgets/task_priority_example.dart';
 import 'package:up_todo/core/constants/constants/app_colors.dart';
-import 'package:up_todo/core/constants/constants/app_texts.dart';
+
 
 class OpenBottomSheet extends StatefulWidget {
   final void Function(
@@ -24,7 +25,7 @@ class _OpenBottomSheetState extends State<OpenBottomSheet> {
   String title = '';
   String description = '';
   DateTime? selectedDate;
-  int _priority = 1; 
+  int _priority = 1;
 
   Future<void> _pickDate() async {
     final DateTime? picked = await showDatePicker(
@@ -49,6 +50,7 @@ class _OpenBottomSheetState extends State<OpenBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       height: 300,
       color: AppColors.darkGrey,
@@ -57,7 +59,7 @@ class _OpenBottomSheetState extends State<OpenBottomSheet> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            AppTexts.addTask,
+            l10n.addTask,
             style: const TextStyle(
               color: AppColors.white,
               fontSize: 20,
@@ -72,7 +74,7 @@ class _OpenBottomSheetState extends State<OpenBottomSheet> {
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: AppColors.grey),
               ),
-              hintText: AppTexts.addTask,
+              hintText: l10n.addTask,
               hintStyle: TextStyle(color: AppColors.grey),
             ),
             style: const TextStyle(color: AppColors.white),
@@ -81,7 +83,7 @@ class _OpenBottomSheetState extends State<OpenBottomSheet> {
           TextField(
             onChanged: (value) => description = value,
             decoration: InputDecoration(
-              hintText: AppTexts.description,
+              hintText: l10n.description,
               hintStyle: TextStyle(color: AppColors.grey),
               enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
               focusedBorder: OutlineInputBorder(
